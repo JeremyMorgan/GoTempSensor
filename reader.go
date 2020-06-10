@@ -20,7 +20,8 @@ var db *sql.DB
 func init() {
 	// set up the database
 	fmt.Println("Connected!! ")
-	db, _ = sql.Open("sqlite3", "./readings.db")
+	db, dbError = sql.Open("sqlite3", "./readings.db")
+	Check(dbError)
 	statement, prepError := db.Prepare("CREATE TABLE IF NOT EXISTS reading (TimeStamp TEXT, Temperature NUMERIC, Humidity NUMERIC)")
 	Check(prepError)
 	statement.Exec()
